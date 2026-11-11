@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Canteen</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 {
+            background: #ff914d;
+            color: white;
+            padding: 20px;
+        }
+
+        .food {
+            background: white;
+            padding: 15px;
+            margin: 15px auto;
+            width: 250px;
+            border-radius: 10px;
+        }
+
+        button {
+            background: #ff914d;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e67332;
+        }
+
+        #cart {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Smart Canteen</h1>
+    <h2>Food Menu</h2>
+
+    <div class="food">
+        <h3>🍔 Burger</h3>
+        <p>Price: ₹50</p>
+        <button onclick="addCart('Burger', 50)">
+            Add to Cart
+        </button>
+    </div>
+
+    <div class="food">
+        <h3>🍕 Pizza</h3>
+        <p>Price: ₹100</p>
+        <button onclick="addCart('Pizza', 100)">
+            Add to Cart
+        </button>
+    </div>
+
+    <div class="food">
+        <h3>🥪 Sandwich</h3>
+        <p>Price: ₹40</p>
+        <button onclick="addCart('Sandwich', 40)">
+            Add to Cart
+        </button>
+    </div>
+
+    <div id="cart">
+        <h2>Your Cart</h2>
+
+        <p id="items">No items added</p>
+
+        <h3 id="total">Total: ₹100</h3>
+
+        <button onclick="placeOrder()">
+            Place Order
+        </button>
+
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        let total = 0;
+        let cartItems = [];
+
+        function addCart(name, price) {
+
+            cartItems.push(name);
+            total = total + price;
+
+            document.getElementById("items").innerHTML =
+                cartItems.join("<br>");
+
+            document.getElementById("total").innerHTML =
+                "Total: ₹" + total;
+
+            document.getElementById("result").innerHTML = "";
+        }
+
+        function placeOrder() {
+
+            if (cartItems.length === 0) {
+
+                document.getElementById("result").innerHTML =
+                    "Please add food items first!";
+
+                return;
+            }
+
+            document.getElementById("result").innerHTML =
+                "Order Placed Successfully! Your order is being prepared.";
+
+            cartItems = [];
+            total = 0;
+
+            document.getElementById("items").innerHTML =
+                "No items added";
+
+            document.getElementById("total").innerHTML =
+                "Total: ₹0";
+        }
+    </script>
+
+</body>
+</html>
